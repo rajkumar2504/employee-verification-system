@@ -29,9 +29,62 @@
   width: 100%;
 }
 
+.skeleton-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.skeleton-card {
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--card-bg);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.skeleton-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--skeleton-bg, #e2e8f0) 25%, var(--skeleton-pulse, #f1f5f9) 50%, var(--skeleton-bg, #e2e8f0) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: linear-gradient(90deg, var(--skeleton-bg, #e2e8f0) 25%, var(--skeleton-pulse, #f1f5f9) 50%, var(--skeleton-bg, #e2e8f0) 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-line.title-line {
+  height: 20px;
+  width: 40%;
+}
+
+.skeleton-line.label-line {
+  height: 10px;
+  width: 70%;
+}
+
 .skeleton-table {
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
   background: var(--card-bg);
 }
@@ -55,9 +108,10 @@
 
 .skeleton-cell {
   height: 16px;
-  background-color: var(--skeleton-bg, #e0e0e0);
+  background: linear-gradient(90deg, var(--skeleton-bg, #e2e8f0) 25%, var(--skeleton-pulse, #f1f5f9) 50%, var(--skeleton-bg, #e2e8f0) 75%);
+  background-size: 200% 100%;
   border-radius: 4px;
-  animation: pulseSkeleton 1.5s infinite ease-in-out;
+  animation: shimmer 1.5s infinite linear;
   flex: 1;
 }
 
@@ -70,20 +124,18 @@
 
 .header-cell {
   height: 20px;
-  background-color: var(--skeleton-header-bg, #d2d2d2);
+  background: linear-gradient(90deg, var(--skeleton-header-bg, #cbd5e1) 25%, var(--skeleton-pulse, #f1f5f9) 50%, var(--skeleton-header-bg, #cbd5e1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
 }
 
 /* Keyframes */
-@keyframes pulseSkeleton {
+@keyframes shimmer {
   0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-    background-color: var(--skeleton-pulse, #f0f0f0);
+    background-position: 200% 0;
   }
   100% {
-    opacity: 0.6;
+    background-position: -200% 0;
   }
 }
 

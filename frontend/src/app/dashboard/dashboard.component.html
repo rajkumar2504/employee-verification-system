@@ -1,14 +1,17 @@
 <div class="dashboard-wrapper">
 
   <!-- Welcome Banner Card -->
-  <div class="welcome-banner mat-elevation-z2" *ngIf="currentUser">
-    <div class="welcome-text">
-      <h1>Employee Verification Dashboard</h1>
-      <p>Welcome back, <strong>{{ currentUser.name }}</strong> ({{ currentUser.email }}). Logged in as <span class="role-tag">{{ currentUser.role }}</span>.</p>
-    </div>
-    <div class="current-date">
-      <mat-icon>today</mat-icon>
-      <span>{{ todayDate | date:'mediumDate' }}</span>
+  <div class="welcome-banner mat-elevation-z3" *ngIf="currentUser">
+    <div class="welcome-banner-overlay"></div>
+    <div class="welcome-content">
+      <div class="welcome-text">
+        <h1>Welcome back, {{ currentUser.name }} 👋</h1>
+        <p>Monitor employee verification workflows, candidate credentials, and compliance audits in real time.</p>
+      </div>
+      <div class="current-date-badge">
+        <mat-icon>today</mat-icon>
+        <span>{{ todayDate | date:'fullDate' }}</span>
+      </div>
     </div>
   </div>
 
@@ -16,52 +19,70 @@
   <div class="stats-grid">
     <!-- Stat Card: Total -->
     <mat-card class="stat-card total-card">
+      <div class="stat-progress-bar bg-total"></div>
       <mat-card-content class="stat-content">
         <div class="stat-icon-wrapper bg-total">
           <mat-icon>assessment</mat-icon>
         </div>
         <div class="stat-numbers">
           <h2 class="stat-count">{{ isLoading ? '...' : stats.total }}</h2>
-          <p class="stat-label">Total Verification Files</p>
+          <p class="stat-label">Total Candidate Files</p>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Stat Card: Verified -->
     <mat-card class="stat-card verified-card">
+      <div class="stat-progress-bar bg-verified"></div>
       <mat-card-content class="stat-content">
         <div class="stat-icon-wrapper bg-verified">
           <mat-icon>check_circle</mat-icon>
         </div>
         <div class="stat-numbers">
           <h2 class="stat-count text-verified">{{ isLoading ? '...' : stats.verified }}</h2>
-          <p class="stat-label">Verified Clear</p>
+          <p class="stat-label">Verified & Clear</p>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Stat Card: Pending / In Progress -->
     <mat-card class="stat-card pending-card">
+      <div class="stat-progress-bar bg-pending"></div>
       <mat-card-content class="stat-content">
         <div class="stat-icon-wrapper bg-pending">
           <mat-icon>hourglass_empty</mat-icon>
         </div>
         <div class="stat-numbers">
           <h2 class="stat-count text-pending">{{ isLoading ? '...' : stats.pending }}</h2>
-          <p class="stat-label">Verification In Progress</p>
+          <p class="stat-label">Checks In Progress</p>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Stat Card: Failed -->
     <mat-card class="stat-card failed-card">
+      <div class="stat-progress-bar bg-failed"></div>
       <mat-card-content class="stat-content">
         <div class="stat-icon-wrapper bg-failed">
           <mat-icon>gpp_bad</mat-icon>
         </div>
         <div class="stat-numbers">
           <h2 class="stat-count text-failed">{{ isLoading ? '...' : stats.failed }}</h2>
-          <p class="stat-label">Discrepancies / Failed</p>
+          <p class="stat-label">Verification Discrepancies</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Stat Card: Admin Users -->
+    <mat-card class="stat-card admin-card">
+      <div class="stat-progress-bar bg-admin"></div>
+      <mat-card-content class="stat-content">
+        <div class="stat-icon-wrapper bg-admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+        </div>
+        <div class="stat-numbers">
+          <h2 class="stat-count text-admin">{{ isLoading ? '...' : stats.admin }}</h2>
+          <p class="stat-label">System Admin Accounts</p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -74,89 +95,253 @@
     <button mat-flat-button color="primary" (click)="fetchRecords()" class="retry-btn">Retry</button>
   </div>
 
-  <!-- Main Table Section -->
-  <mat-card class="table-card mat-elevation-z4">
-    <div class="table-header-toolbar">
-      <div class="table-title-section">
-        <h3>Background Screening Records</h3>
-        <p class="table-subtitle">Comprehensive listing of candidate screening and check states</p>
+  <!-- Main Content Grid Layout: Split Table & Timeline -->
+  <div class="dashboard-content-layout" [ngClass]="{'has-selection': selectedCandidate}">
+    
+    <!-- Table Card -->
+    <mat-card class="table-card mat-elevation-z4">
+      <div class="table-header-toolbar">
+        <div class="table-title-section">
+          <h3>Background Screening Registry</h3>
+          <p class="table-subtitle">Select a candidate row to track real-time audit milestones.</p>
+        </div>
+
+        <!-- Search Input -->
+        <mat-form-field appearance="outline" class="search-form-field">
+          <mat-label>Search records...</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, department..." #searchInput>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
       </div>
 
-      <!-- Search Input -->
-      <mat-form-field appearance="outline" class="search-form-field">
-        <mat-label>Search candidate records...</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, department..." #searchInput>
-        <mat-icon matSuffix color="primary">search</mat-icon>
-      </mat-form-field>
+      <mat-card-content class="table-content-area">
+        <!-- Loading Indicators -->
+        <app-loader *ngIf="isLoading" type="both" message="Simulating API latency (2.5s delay)... Loading records safely." [rows]="5" [cols]="6"></app-loader>
+
+        <!-- User records Table -->
+        <div class="table-scroll-container" [hidden]="isLoading || errorMessage">
+          <table mat-table [dataSource]="dataSource" matSort class="verification-table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let element"> #{{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidate Name </th>
+              <td mat-cell *matCellDef="let element" class="cell-primary"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email Address </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <!-- Department Column -->
+            <ng-container matColumnDef="department">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+              <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+            </ng-container>
+
+            <!-- Joined Date Column -->
+            <ng-container matColumnDef="joinedDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Submission </th>
+              <td mat-cell *matCellDef="let element"> {{element.joinedDate | date:'mediumDate'}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Screening Status </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-set>
+                  <mat-chip class="custom-chip-badge" [ngClass]="getStatusClass(element.status)" disabled>
+                    {{element.status}}
+                  </mat-chip>
+                </mat-chip-set>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row 
+                *matRowDef="let row; columns: displayedColumns;" 
+                class="table-row-hover"
+                [class.selected-row]="selectedCandidate && selectedCandidate.id === row.id"
+                (click)="selectCandidate(row)">
+            </tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell no-data-cell" colspan="6">
+                <div class="no-data-display">
+                  <mat-icon>find_in_page</mat-icon>
+                  <p>No screening records matching the filter: "{{searchInput.value}}"</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Paginator -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of user records" [hidden]="isLoading || errorMessage"></mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Details and Verification Timeline Tracker Side Panel -->
+    <div class="timeline-side-panel">
+      <!-- Empty State UI -->
+      <div class="empty-state-panel glass-panel" *ngIf="!selectedCandidate">
+        <mat-icon class="empty-state-icon">folder_shared</mat-icon>
+        <h3>No Selection</h3>
+        <p>Click on any candidate record in the table to view their verification lifecycle timeline and audit reports.</p>
+      </div>
+
+      <!-- Selected Candidate Card -->
+      <mat-card class="details-card glass-panel" *ngIf="selectedCandidate">
+        <mat-card-header class="details-header">
+          <div class="details-avatar">
+            {{ selectedCandidate.name ? selectedCandidate.name.charAt(0) : 'U' }}
+          </div>
+          <div class="details-header-text">
+            <h3 class="details-name">{{ selectedCandidate.name }}</h3>
+            <span class="details-role">{{ selectedCandidate.role }}</span>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content class="details-content">
+          <!-- Information Grid -->
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Email Address</span>
+              <span class="info-value">{{ selectedCandidate.email }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Phone Contact</span>
+              <span class="info-value">{{ selectedCandidate.phone || 'Not provided' }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Department</span>
+              <span class="info-value">{{ selectedCandidate.department }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Registered On</span>
+              <span class="info-value">{{ selectedCandidate.joinedDate | date:'longDate' }}</span>
+            </div>
+          </div>
+
+          <mat-divider class="card-divider"></mat-divider>
+
+          <!-- Timeline Section -->
+          <h4 class="section-title">Verification Workflow Lifecycle</h4>
+          
+          <div class="vertical-timeline">
+            <!-- Step 1: Submission -->
+            <div class="v-timeline-item" [ngClass]="getStepStatus(1)">
+              <div class="v-timeline-line"></div>
+              <div class="v-timeline-icon">
+                <mat-icon>assignment_turned_in</mat-icon>
+              </div>
+              <div class="v-timeline-content">
+                <h5 class="v-step-title">Application Submitted</h5>
+                <p class="v-step-desc">Candidate verification record registered</p>
+              </div>
+            </div>
+
+            <!-- Step 2: Document check -->
+            <div class="v-timeline-item" [ngClass]="getStepStatus(2)">
+              <div class="v-timeline-line"></div>
+              <div class="v-timeline-icon">
+                <mat-icon>badge</mat-icon>
+              </div>
+              <div class="v-timeline-content">
+                <h5 class="v-step-title">Document Verification</h5>
+                <p class="v-step-desc">Identity, degrees & transcripts review</p>
+              </div>
+            </div>
+
+            <!-- Step 3: Employment verification -->
+            <div class="v-timeline-item" [ngClass]="getStepStatus(3)">
+              <div class="v-timeline-line"></div>
+              <div class="v-timeline-icon">
+                <mat-icon>business</mat-icon>
+              </div>
+              <div class="v-timeline-content">
+                <h5 class="v-step-title">Employment Verification</h5>
+                <p class="v-step-desc">Reference checks & previous job audits</p>
+              </div>
+            </div>
+
+            <!-- Step 4: Background clearing -->
+            <div class="v-timeline-item" [ngClass]="getStepStatus(4)">
+              <div class="v-timeline-line"></div>
+              <div class="v-timeline-icon">
+                <mat-icon>gpp_maybe</mat-icon>
+              </div>
+              <div class="v-timeline-content">
+                <h5 class="v-step-title">Background Clearance</h5>
+                <p class="v-step-desc">Criminal checks & records verification</p>
+              </div>
+            </div>
+
+            <!-- Step 5: Final release -->
+            <div class="v-timeline-item" [ngClass]="getStepStatus(5)">
+              <div class="v-timeline-icon">
+                <mat-icon>verified</mat-icon>
+              </div>
+              <div class="v-timeline-content">
+                <h5 class="v-step-title">Final Compliance Seal</h5>
+                <p class="v-step-desc">Portal credentials and certification release</p>
+              </div>
+            </div>
+          </div>
+
+          <mat-divider class="card-divider"></mat-divider>
+
+          <!-- Auditor Notes -->
+          <div class="auditor-comments-panel">
+            <h4 class="section-title">Auditor Compliance Comments</h4>
+            <div class="comments-box">
+              <mat-icon class="quote-icon">notes</mat-icon>
+              <p class="comments-text">{{ selectedCandidate.comments || 'No audit remarks recorded yet.' }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Recent Activity Card -->
+      <mat-card class="activity-card glass-panel" style="margin-top: 1.5rem;">
+        <mat-card-header class="activity-header">
+          <mat-icon class="activity-header-icon">history</mat-icon>
+          <h3 class="activity-title">Recent Compliance Audits</h3>
+        </mat-card-header>
+        <mat-card-content class="activity-content">
+          <div class="activity-timeline">
+            <div class="activity-item" *ngFor="let act of recentActivities">
+              <div class="activity-icon-wrapper" [ngClass]="act.type">
+                <mat-icon>{{ act.icon }}</mat-icon>
+              </div>
+              <div class="activity-details">
+                <p class="activity-text">{{ act.text }}</p>
+                <span class="activity-time">{{ act.time }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
 
-    <mat-card-content class="table-content-area">
-      <!-- Loading Indicators (Artificial delay demonstration) -->
-      <app-loader *ngIf="isLoading" type="both" message="Simulating API latency (2.5s delay)... Loading records safely." [rows]="5" [cols]="6"></app-loader>
+  </div>
 
-      <!-- User records Table -->
-      <div class="table-scroll-container" [hidden]="isLoading || errorMessage">
-        <table mat-table [dataSource]="dataSource" matSort class="verification-table">
-
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let element"> #{{element.id}} </td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidate Name </th>
-            <td mat-cell *matCellDef="let element" class="cell-primary"> {{element.name}} </td>
-          </ng-container>
-
-          <!-- Email Column -->
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email Address </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-          </ng-container>
-
-          <!-- Department Column -->
-          <ng-container matColumnDef="department">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
-            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-          </ng-container>
-
-          <!-- Joined Date Column -->
-          <ng-container matColumnDef="joinedDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Submission Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.joinedDate | date:'mediumDate'}} </td>
-          </ng-container>
-
-          <!-- Status Column -->
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Screening Status </th>
-            <td mat-cell *matCellDef="let element">
-              <span class="status-badge" [ngClass]="getStatusClass(element.status)">
-                {{element.status}}
-              </span>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover"></tr>
-
-          <!-- Row shown when there is no matching data. -->
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell no-data-cell" colspan="6">
-              <div class="no-data-display">
-                <mat-icon>find_in_page</mat-icon>
-                <p>No screening records matching the filter: "{{searchInput.value}}"</p>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <!-- Paginator -->
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of user records" [hidden]="isLoading || errorMessage"></mat-paginator>
-
-    </mat-card-content>
-  </mat-card>
+  <!-- Dashboard Footer -->
+  <footer class="dashboard-footer">
+    <mat-divider class="footer-divider"></mat-divider>
+    <div class="footer-content">
+      <span class="footer-copy">VeriShield Compliance Portal © 2026</span>
+      <span class="footer-platform">Secure Employee Background Screening Platform</span>
+    </div>
+  </footer>
 
 </div>

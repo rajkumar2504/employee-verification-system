@@ -1,10 +1,28 @@
 <div class="sidebar-container" *ngIf="isLoggedIn">
   
-  <!-- Sidebar Header (Optional Logo/Title in sidebar) -->
+  <!-- Sidebar Header -->
   <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <mat-icon class="brand-icon">verified_user</mat-icon>
+      <span class="brand-text">VERISHIELD</span>
+    </div>
     <span class="system-tag">BGC VERIFICATION HUB</span>
   </div>
 
+  <!-- User Avatar Panel -->
+  <div class="sidebar-user-panel" *ngIf="currentUser">
+    <div class="sidebar-avatar">
+      {{ currentUser.name ? currentUser.name.charAt(0) : 'U' }}
+    </div>
+    <div class="sidebar-user-details">
+      <span class="sidebar-username">{{ currentUser.name }}</span>
+      <span class="sidebar-role-badge" [ngClass]="{'role-admin': currentUser.role === 'Admin'}">
+        {{ currentUser.role }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Navigation List -->
   <mat-nav-list class="sidebar-nav-list">
     <!-- Dashboard Link -->
     <a mat-list-item routerLink="/dashboard" routerLinkActive="active-item" class="nav-item">
@@ -17,6 +35,24 @@
       <mat-icon matListItemIcon>people</mat-icon>
       <span matListItemTitle>User Management</span>
     </a>
+
+    <!-- Verification Records Link (points to dashboard) -->
+    <a mat-list-item routerLink="/dashboard" class="nav-item">
+      <mat-icon matListItemIcon>assignment</mat-icon>
+      <span matListItemTitle>Verification Records</span>
+    </a>
+
+    <!-- Theme Toggle Link -->
+    <button mat-list-item (click)="toggleTheme()" class="nav-item nav-btn-item">
+      <mat-icon matListItemIcon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <span matListItemTitle>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+    </button>
+
+    <!-- Logout Link -->
+    <button mat-list-item (click)="logout()" class="nav-item nav-btn-item logout-nav-item">
+      <mat-icon matListItemIcon class="logout-icon">logout</mat-icon>
+      <span matListItemTitle>Logout</span>
+    </button>
   </mat-nav-list>
 
   <!-- Sidebar Footer -->

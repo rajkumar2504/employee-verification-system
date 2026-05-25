@@ -8,6 +8,18 @@
 
   <!-- Skeleton Table Loader -->
   <div *ngIf="type === 'skeleton' || type === 'both'" class="skeleton-section">
+    <!-- Skeleton Metrics Cards -->
+    <div class="skeleton-cards-grid">
+      <div class="skeleton-card" *ngFor="let card of [1, 2, 3, 4, 5]">
+        <div class="skeleton-card-icon"></div>
+        <div class="skeleton-card-details">
+          <div class="skeleton-line title-line"></div>
+          <div class="skeleton-line label-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skeleton Table -->
     <div class="skeleton-table">
       <!-- Header Skeleton -->
       <div class="skeleton-row header-skeleton">

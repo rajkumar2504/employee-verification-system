@@ -4,38 +4,49 @@
 /* Design System Token Definitions */
 :root {
   /* Common Palette */
-  --primary-color: #3f51b5;
-  --primary-light: rgba(63, 81, 181, 0.08);
-  --primary-dark: #303f9f;
-  --accent-color: #ff4081;
-  --error-color: #f44336;
+  --primary-color: #ff6b00;
+  --primary-light: rgba(255, 107, 0, 0.06);
+  --primary-dark: #e05e00;
+  --accent-color: #ff8533;
+  --error-color: #ef4444;
   
   /* Light Theme Variables */
-  --page-bg: #f5f7fb;
+  --page-bg: #f8fafc;
   --surface-bg: #ffffff;
   --card-bg: #ffffff;
   --navbar-bg: #ffffff;
-  --sidebar-bg: #ffffff;
-  --sidebar-hover-bg: rgba(63, 81, 181, 0.04);
-  --sidebar-active-bg: linear-gradient(135deg, #3f51b5 0%, #1976d2 100%);
+  
+  /* Sidebar is dark in both themes as per corporate style */
+  --sidebar-bg: #0f172a;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
+  --sidebar-active-bg: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
   --sidebar-active-color: #ffffff;
+  --sidebar-text-primary: #f8fafc;
+  --sidebar-text-secondary: #94a3b8;
+  
   --border-color: #e2e8f0;
   
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
   
-  --table-header-bg: #f8fafc;
-  --table-row-hover-bg: #f1f5f9;
-  --welcome-gradient-end: #e8eaf6;
+  --table-header-bg: #f3f4f6;
+  --table-row-hover-bg: #f9fafb;
+  --welcome-gradient-end: #fff0e6;
   
   --skeleton-bg: #e2e8f0;
   --skeleton-pulse: #f1f5f9;
   --skeleton-header-bg: #cbd5e1;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+
+  /* Glassmorphism Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
 }
 
 body.dark-theme {
@@ -44,10 +55,14 @@ body.dark-theme {
   --surface-bg: #1e293b;
   --card-bg: #1e293b;
   --navbar-bg: #1e293b;
-  --sidebar-bg: #1e293b;
+  
+  --sidebar-bg: #0b0f19;
   --sidebar-hover-bg: rgba(255, 255, 255, 0.04);
-  --sidebar-active-bg: linear-gradient(135deg, #5c6bc0 0%, #29b6f6 100%);
-  --sidebar-active-color: #0f172a;
+  --sidebar-active-bg: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+  --sidebar-active-color: #ffffff;
+  --sidebar-text-primary: #f8fafc;
+  --sidebar-text-secondary: #64748b;
+
   --border-color: #334155;
   
   --text-primary: #f8fafc;
@@ -55,8 +70,8 @@ body.dark-theme {
   --text-muted: #64748b;
   
   --table-header-bg: #151f32;
-  --table-row-hover-bg: #1e293b;
-  --welcome-gradient-end: #1e2540;
+  --table-row-hover-bg: #243249;
+  --welcome-gradient-end: #2d201b;
   
   --skeleton-bg: #334155;
   --skeleton-pulse: #475569;
@@ -65,9 +80,12 @@ body.dark-theme {
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  
-  --primary-color: #7986cb;
-  --primary-light: rgba(121, 134, 203, 0.15);
+
+  /* Glassmorphism Dark Mode */
+  --glass-bg: rgba(30, 41, 59, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Global Resetting */
@@ -75,8 +93,11 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: 'Poppins', 'Outfit', 'Inter', sans-serif;
   background-color: var(--page-bg);
+  background-image: radial-gradient(circle at 85% 15%, rgba(255, 107, 0, 0.04), transparent 45%),
+                    radial-gradient(circle at 15% 85%, rgba(99, 102, 241, 0.03), transparent 50%);
+  background-attachment: fixed;
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
@@ -84,8 +105,9 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', 'Poppins', sans-serif;
   margin-top: 0;
+  font-weight: 600;
 }
 
 /* Customized Angular Material Overrides */
@@ -93,15 +115,41 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--card-bg) !important;
   color: var(--text-primary) !important;
   border: 1px solid var(--border-color) !important;
+  border-radius: 20px !important; /* Rounded corners */
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden;
 }
 
-/* Form Fields */
+::ng-deep .mat-mdc-card-title {
+  color: var(--text-primary) !important;
+}
+
+::ng-deep .mat-mdc-card-subtitle {
+  color: var(--text-secondary) !important;
+}
+
+/* Glassmorphism helper class */
+.glass-panel {
+  backdrop-filter: var(--glass-blur) !important;
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Form Fields Custom Styling */
+::ng-deep .mat-mdc-form-field {
+  margin-bottom: 0.5rem;
+}
+
 ::ng-deep .mat-mdc-form-field-label {
   color: var(--text-secondary) !important;
 }
 
 ::ng-deep .mat-mdc-text-field-wrapper {
-  background-color: var(--surface-bg) !important;
+  background-color: var(--page-bg) !important;
+  border-radius: 12px !important; /* Rounded corners */
+  transition: background-color 0.2s ease;
 }
 
 ::ng-deep .mat-mdc-form-field-focus-active .mdc-floating-label {
@@ -112,6 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
 ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
   border-color: var(--border-color) !important;
+  border-radius: 12px !important;
 }
 
 ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
@@ -138,27 +187,57 @@ h1, h2, h3, h4, h5, h6 {
 ::ng-deep .mat-mdc-option {
   color: var(--text-primary) !important;
   background-color: var(--card-bg) !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 ::ng-deep .mat-mdc-option:hover, ::ng-deep .mat-mdc-option.mdc-list-item--selected {
-  background-color: var(--sidebar-hover-bg) !important;
+  background-color: var(--table-row-hover-bg) !important;
 }
 
-/* Custom Snackbars */
+/* Custom Snackbar Styles */
 .success-snackbar {
-  --mdc-snackbar-container-color: #2e7d32;
-  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mdc-snackbar-container-color: #10b981 !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
+  font-family: 'Poppins', sans-serif !important;
+  border-radius: 12px !important;
 }
 
 .error-snackbar {
-  --mdc-snackbar-container-color: #c62828;
-  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mdc-snackbar-container-color: #ef4444 !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
+  font-family: 'Poppins', sans-serif !important;
+  border-radius: 12px !important;
+}
+
+/* Buttons Styling Override */
+.premium-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  font-family: 'Poppins', sans-serif !important;
+  letter-spacing: 0.2px !important;
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2) !important;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.premium-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 107, 0, 0.3) !important;
+}
+
+.premium-btn:active {
+  transform: translateY(0);
+}
+
+.gradient-orange-btn {
+  background: linear-gradient(to right, #ff6b00, #ff8533) !important;
+  color: #ffffff !important;
 }
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -167,9 +246,19 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* Material Button text color in dark theme overrides */
+::ng-deep .mat-mdc-button:not([disabled]) {
+  color: var(--primary-color) !important;
+}
+
+::ng-deep .mat-mdc-button[disabled] {
+  color: var(--text-muted) !important;
+  opacity: 0.35 !important;
 }

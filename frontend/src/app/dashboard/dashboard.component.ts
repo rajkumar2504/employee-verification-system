@@ -17,13 +17,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   isLoading = true;
   errorMessage: string | null = null;
   todayDate: Date = new Date();
+  selectedCandidate: User | null = null;
+
+  recentActivities = [
+    { type: 'verified', text: 'Verification approved for Raj Kumar', time: '12 mins ago', icon: 'check_circle' },
+    { type: 'progress', text: 'Identity documents uploaded for Alice Smith', time: '2 hours ago', icon: 'cloud_upload' },
+    { type: 'failed', text: 'Screening discrepancy flagged for David Lee', time: '1 day ago', icon: 'warning' },
+    { type: 'progress', text: 'Past references check completed for John Doe', time: '1 day ago', icon: 'business' },
+    { type: 'verified', text: 'Verification certified clear for Sarah Connor', time: '3 days ago', icon: 'verified' }
+  ];
 
   // Stats Counters
   stats = {
     total: 0,
     verified: 0,
     pending: 0,
-    failed: 0
+    failed: 0,
+    admin: 0
   };
 
   // Table Configuration
@@ -51,12 +61,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   fetchRecords(): void {
     this.isLoading = true;
     this.errorMessage = null;
+    this.selectedCandidate = null;
 
     this.userService.getUsers().subscribe({
       next: (data) => {
         this.dataSource.data = data;
         this.calculateStats(data);
         this.isLoading = false;
+        // Auto-select the first candidate in the list if available
+        if (data.length > 0) {
+          this.selectedCandidate = data[0];
+        }
       },
       error: (err) => {
         this.isLoading = false;
@@ -76,8 +91,63 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (user.status === 'Verified') acc.verified++;
       else if (user.status === 'Pending' || user.status === 'In Progress') acc.pending++;
       else if (user.status === 'Failed Verification') acc.failed++;
+      
+      if (user.role === 'Admin') acc.admin++;
       return acc;
-    }, { total: 0, verified: 0, pending: 0, failed: 0 });
+    }, { total: 0, verified: 0, pending: 0, failed: 0, admin: 0 });
+  }
+
+  selectCandidate(candidate: User): void {
+    this.selectedCandidate = candidate;
+  }
+
+  getStepStatus(stepIndex: number): 'completed' | 'active' | 'pending' | 'failed' {
+    if (!this.selectedCandidate) {
+      return 'pending';
+    }
+
+    const status = this.selectedCandidate.status;
+
+    switch (stepIndex) {
+      case 1: // Application Submitted
+        return 'completed'; // Always completed
+
+      case 2: // Document Verification
+        if (status === 'Pending') {
+          return 'active';
+        }
+        return 'completed'; // Done for In Progress, Verified, Failed
+
+      case 3: // Employment Verification
+        if (status === 'Pending') {
+          return 'pending';
+        }
+        if (status === 'In Progress') {
+          return 'active';
+        }
+        return 'completed'; // Done for Verified, Failed
+
+      case 4: // Background Check
+        if (status === 'Pending' || status === 'In Progress') {
+          return 'pending';
+        }
+        if (status === 'Failed Verification') {
+          return 'failed';
+        }
+        return 'completed'; // Done for Verified
+
+      case 5: // Final Approval
+        if (status === 'Pending' || status === 'In Progress') {
+          return 'pending';
+        }
+        if (status === 'Failed Verification') {
+          return 'failed';
+        }
+        return 'completed'; // Done for Verified
+
+      default:
+        return 'pending';
+    }
   }
 
   applyFilter(event: Event): void {

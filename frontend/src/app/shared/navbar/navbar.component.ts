@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ThemeService } from '../../services/theme.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +11,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./navbar.component.css'],
   standalone: false
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Output() toggleSidebar = new EventEmitter<void>();
   
   currentUser: any = null;
   isDark = false;
+  currentTime = '';
+  private clockSub!: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +34,22 @@ export class NavbarComponent implements OnInit {
     this.themeService.isDarkMode$.subscribe(dark => {
       this.isDark = dark;
     });
+
+    this.updateTime();
+    this.clockSub = interval(1000).subscribe(() => {
+      this.updateTime();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.clockSub) {
+      this.clockSub.unsubscribe();
+    }
+  }
+
+  updateTime(): void {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   }
 
   onToggleSidebar(): void {
@@ -42,6 +61,22 @@ export class NavbarComponent implements OnInit {
     const mode = this.isDark ? 'Dark Mode' : 'Light Mode';
     this.snackBar.open(`${mode} activated.`, 'Dismiss', {
       duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  viewProfile(): void {
+    this.snackBar.open('User profile information is managed by Active Directory.', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  openSettings(): void {
+    this.snackBar.open('Security settings are locked by administrator policies.', 'Dismiss', {
+      duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom'
     });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { ThemeService } from '../../services/theme.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +14,13 @@ export class SidebarComponent implements OnInit {
   isAdmin = false;
   isLoggedIn = false;
   currentUser: any = null;
+  isDark = false;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private themeService: ThemeService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -24,5 +29,29 @@ export class SidebarComponent implements OnInit {
       this.isLoggedIn = this.authService.isLoggedIn();
       this.isAdmin = this.authService.isAdmin();
     });
+
+    this.themeService.isDarkMode$.subscribe(dark => {
+      this.isDark = dark;
+    });
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+    const mode = this.isDark ? 'Dark Mode' : 'Light Mode';
+    this.snackBar.open(`${mode} activated.`, 'Dismiss', {
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.snackBar.open('Logged out successfully.', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+    this.router.navigate(['/login']);
   }
 }

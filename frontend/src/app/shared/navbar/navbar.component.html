@@ -7,41 +7,88 @@
     
     <div class="brand-container">
       <div class="brand-logo">
-        <mat-icon color="primary">verified_user</mat-icon>
+        <mat-icon>verified_user</mat-icon>
       </div>
-      <span class="brand-text">VeriShield<span class="brand-highlight">Compliance</span></span>
+      <span class="brand-text">VeriShield <span class="brand-highlight">Compliance</span></span>
     </div>
   </div>
 
   <span class="spacer"></span>
 
-  <!-- Right Side: Theme, User Info & Action -->
+  <!-- Right Side: Action Badges & Dropdown -->
   <div class="nav-right" *ngIf="currentUser">
-    <!-- Dark Mode Toggle -->
-    <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'" aria-label="Toggle Dark/Light Mode">
+    
+    <!-- Live Updating Clock -->
+    <div class="navbar-clock-badge">
+      <mat-icon class="clock-icon">schedule</mat-icon>
+      <span class="clock-time">{{ currentTime }}</span>
+    </div>
+    
+    <!-- Quick Theme Toggle in Navbar -->
+    <button mat-icon-button class="theme-quick-toggle" (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'" aria-label="Toggle Dark/Light Mode">
       <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
 
-    <!-- User Information Profile -->
-    <div class="user-profile-badge">
-      <div class="avatar-placeholder">
-        {{ currentUser.name ? currentUser.name.charAt(0) : 'U' }}
-      </div>
-      <div class="profile-details">
+    <!-- User Profile Dropdown Button -->
+    <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-trigger-btn">
+      <div class="user-profile-badge">
+        <div class="avatar-container">
+          <div class="avatar-placeholder">
+            {{ currentUser.name ? currentUser.name.charAt(0) : 'U' }}
+          </div>
+          <span class="online-indicator-dot"></span>
+        </div>
         <span class="profile-name">{{ currentUser.name }}</span>
-        <span class="profile-role" [ngClass]="{'role-admin': currentUser.role === 'Admin', 'role-user': currentUser.role !== 'Admin'}">
-          {{ currentUser.role }}
-        </span>
+        <mat-icon class="chevron-icon">expand_more</mat-icon>
       </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="nav-divider"></div>
-
-    <!-- Logout Action -->
-    <button mat-icon-button color="warn" (click)="logout()" matTooltip="Logout from system" aria-label="Log Out">
-      <mat-icon>logout</mat-icon>
     </button>
+
+    <!-- Angular Material Dropdown Menu -->
+    <mat-menu #profileMenu="matMenu" xPosition="before" class="premium-profile-menu">
+      <!-- Menu Header Card -->
+      <div class="menu-user-card" (click)="$event.stopPropagation()">
+        <div class="menu-avatar-container">
+          <div class="menu-avatar">
+            {{ currentUser.name ? currentUser.name.charAt(0) : 'U' }}
+          </div>
+          <span class="menu-online-indicator-dot"></span>
+        </div>
+        <div class="menu-user-info">
+          <span class="menu-user-name">{{ currentUser.name }}</span>
+          <span class="menu-user-email">{{ currentUser.email }}</span>
+          <span class="menu-user-role" [ngClass]="{'role-admin': currentUser.role === 'Admin', 'role-user': currentUser.role !== 'Admin'}">
+            {{ currentUser.role }}
+          </span>
+        </div>
+      </div>
+      
+      <mat-divider></mat-divider>
+
+      <!-- Menu Items -->
+      <button mat-menu-item (click)="viewProfile()">
+        <mat-icon>person</mat-icon>
+        <span>My Profile</span>
+      </button>
+      
+      <button mat-menu-item (click)="openSettings()">
+        <mat-icon>settings</mat-icon>
+        <span>Account Settings</span>
+      </button>
+
+      <button mat-menu-item (click)="toggleTheme()">
+        <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        <span>{{ isDark ? 'Light Theme' : 'Dark Theme' }}</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <!-- Logout Item -->
+      <button mat-menu-item (click)="logout()" class="logout-item">
+        <mat-icon color="warn">logout</mat-icon>
+        <span class="text-danger">Sign Out</span>
+      </button>
+    </mat-menu>
+
   </div>
 
   <!-- Unauthenticated Dark Mode Toggler -->

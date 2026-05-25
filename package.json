@@ -1,0 +1,11 @@
+{
+  "name": "employee-verification-system-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "backend": "npm run dev --prefix backend",
+    "frontend": "npm start --prefix frontend",
+    "start": "npx concurrently --kill-others \"npm run backend\" \"npm run frontend\""
+  }
+}
