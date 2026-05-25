@@ -13,6 +13,7 @@ A modern, responsive, full-stack Single Page Application (SPA) designed to simul
 ## 📊 Compliance Dashboard (Dark Theme)
 
 <img width="100%" alt="Compliance Dashboard" src="screenshots/dashboard.png" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b" />
 
 ---
 
