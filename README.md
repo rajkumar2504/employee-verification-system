@@ -5,29 +5,32 @@ A modern, responsive, full-stack Single Page Application (SPA) designed to simul
 ---
 ## 🔐 Split-Screen Login Page
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b" />
+<img width="1920" height="1080" alt="Login Page" src="screenshots/login.png" />
 
 ## 📊 Compliance Dashboard (Dark Theme)
 
-<img src="./screenshots/dashboard.png" width="100%" />
+<img width="1920" height="1080" alt="Dashboard" src="screenshots/dashboard.png" />
 
 ---
 
 ## 👥 User & Compliance Management
 
-<img src="./screenshots/admin.png" width="100%" />
+<img width="1920" height="1080" alt="Admin Panel" src="screenshots/admin.png" />
 
 ---
 
 ## 🔄 Verification Workflow Stepper
 
-<img src="./screenshots/workflow.png" width="100%" />
+<img width="1920" height="1080" alt="Workflow Stepper" src="screenshots/workflow.png" />
 
 ---
 
 ## 🌙 Dark Mode Dropdown & Theme Settings
 
-<img src="./screenshots/darkmode.png" width="100%" />
+<img width="1920" height="1080" alt="Dark Mode" src="screenshots/darkmode.png" />
+
+---
+
 ## 🚀 Key Features
 
 *   **Secure JWT Authentication**: Role-based access control (RBAC) with secure session storage.
