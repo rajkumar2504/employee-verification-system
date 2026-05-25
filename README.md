@@ -5,7 +5,8 @@ A modern, responsive, full-stack Single Page Application (SPA) designed to simul
 ---
 ## 🔐 Split-Screen Login Page
 
-![Login Page](https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b)
+<img width="1920" height="1080" alt="Screenshot (332)" src="https://github.com/user-attachments/assets/48a1a9ee-2906-4b2a-8f3f-ad62aa6d0bf2" />
+
 
 ## 📊 Compliance Dashboard (Dark Theme)
 
