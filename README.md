@@ -3,41 +3,33 @@
 A modern, responsive, full-stack Single Page Application (SPA) designed to simulate an enterprise employee background screening and user management system. It provides real-time verification status monitoring, role-based panel control, dynamic searching/filtering, and dark mode features.
 
 ---
-## 📷 Split-Screen Login Page
+## 🔐 Split-Screen Login Page
 
-<img width="100%" alt="Login Page"
-src="https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b" />
+<img src="./screenshots/login.png" width="100%" />
 
 ---
 
 ## 📊 Compliance Dashboard (Dark Theme)
 
-<img width="100%" alt="Compliance Dashboard"
-src="https://github.com/user-attachments/assets/7ad9825c-c5ce-43e2-be21-93552a8b2cfe" />
+<img src="./screenshots/dashboard.png" width="100%" />
 
 ---
 
 ## 👥 User & Compliance Management
 
-<img width="100%" alt="User Management"
-src="https://github.com/user-attachments/assets/9684cae7-d500-4718-a39c-a1328085ebbc" />
+<img src="./screenshots/admin.png" width="100%" />
 
 ---
 
 ## 🔄 Verification Workflow Stepper
 
-<img width="100%" alt="Workflow Timeline"
-src="https://github.com/user-attachments/assets/29da1fd5-7288-4a09-b684-37bea7c56e8c" />
+<img src="./screenshots/workflow.png" width="100%" />
 
 ---
 
 ## 🌙 Dark Mode Dropdown & Theme Settings
 
-<img width="100%" alt="Navbar Settings"
-src="https://github.com/user-attachments/assets/dd257d04-3ba8-4747-aa84-48b284531a79" />
-
----
-
+<img src="./screenshots/darkmode.png" width="100%" />
 ## 🚀 Key Features
 
 *   **Secure JWT Authentication**: Role-based access control (RBAC) with secure session storage.
