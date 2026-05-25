@@ -5,31 +5,29 @@ A modern, responsive, full-stack Single Page Application (SPA) designed to simul
 ---
 ## 🔐 Split-Screen Login Page
 
-<img width="1920" height="1080" alt="Login Page" src="screenshots/login.png" />
+<img width="1920" height="1080" alt="Login Page" src="https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b" />
 
 ## 📊 Compliance Dashboard (Dark Theme)
 
-<img width="1920" height="1080" alt="Dashboard" src="screenshots/dashboard.png" />
+<img width="1920" height="1080" alt="Dashboard" src="https://github.com/user-attachments/assets/7ad9825c-c5ce-43e2-be21-93552a8b2cfe" />
 
 ---
 
 ## 👥 User & Compliance Management
 
-<img width="1920" height="1080" alt="Admin Panel" src="screenshots/admin.png" />
+<img width="1920" height="1080" alt="Admin Panel" src="https://github.com/user-attachments/assets/9684cae7-d500-4718-a39c-a1328085ebbc" />
 
 ---
 
 ## 🔄 Verification Workflow Stepper
 
-<img width="1920" height="1080" alt="Workflow Stepper" src="screenshots/workflow.png" />
+<img width="1920" height="1080" alt="Workflow Stepper" src="https://github.com/user-attachments/assets/29da1fd5-7288-4a09-b684-37bea7c56e8c" />
 
 ---
 
 ## 🌙 Dark Mode Dropdown & Theme Settings
 
-<img width="1920" height="1080" alt="Dark Mode" src="screenshots/darkmode.png" />
-
----
+<img width="1920" height="1080" alt="Dark Mode" src="https://github.com/user-attachments/assets/dd257d04-3ba8-4747-aa84-48b284531a79" />
 
 ## 🚀 Key Features
 
