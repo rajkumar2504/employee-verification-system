@@ -2,30 +2,6 @@
 
 A modern, responsive, full-stack Single Page Application (SPA) designed to simulate an enterprise employee background screening and user management system. It provides real-time verification status monitoring, role-based panel control, dynamic searching/filtering, and dark mode features.
 
----
-## 🔐 Split-Screen Login Page
-
-<img width="1920" height="1080" alt="Screenshot (332)" src="https://github.com/user-attachments/assets/42140a03-b0f3-49e9-9063-6d16ca51697a" />
-
-
-
-## 📊 Compliance Dashboard (Dark Theme)
-
-<img width="1920" height="1080" alt="Screenshot (336)" src="https://github.com/user-attachments/assets/ce1f724b-533b-46c6-916d-744ff85e203b" />
-
----
-
-## 👥 User & Compliance Management
-
-<img width="1920" height="1080" alt="Screenshot (336)" src="https://github.com/user-attachments/assets/f97c4be9-3aae-46ff-907a-4c557347f412" />
-
-
----
-
-## 🔄 Verification Workflow Stepper
-
-<img width="1920" height="1080" alt="Screenshot (335)" src="https://github.com/user-attachments/assets/68746631-a876-4d30-bb50-e7535127a78c" />
-
 
 ---
 ## 🚀 Key Features
@@ -162,3 +138,30 @@ All request payloads should use `application/json` format. Protected endpoints r
 | **POST** | `/users` | Admin Only | Creates a new user record/screening file. |
 | **PUT** | `/users/:id` | Admin Only | Modifies details or verification status of an existing candidate. |
 | **DELETE**| `/users/:id` | Admin Only | Deletes a screening record (Cannot self-delete logged-in admin). |
+
+---
+
+## 🔐 Split-Screen Login Page
+
+<img width="1920" height="1080" alt="Screenshot (332)" src="https://github.com/user-attachments/assets/42140a03-b0f3-49e9-9063-6d16ca51697a" />
+
+
+
+## 📊 Compliance Dashboard (Dark Theme)
+
+<img width="1920" height="1080" alt="Screenshot (336)" src="https://github.com/user-attachments/assets/ce1f724b-533b-46c6-916d-744ff85e203b" />
+
+---
+
+## 👥 User & Compliance Management
+
+<img width="1920" height="1080" alt="Screenshot (336)" src="https://github.com/user-attachments/assets/f97c4be9-3aae-46ff-907a-4c557347f412" />
+
+
+---
+
+## 🔄 Verification Workflow Stepper
+
+<img width="1920" height="1080" alt="Screenshot (335)" src="https://github.com/user-attachments/assets/68746631-a876-4d30-bb50-e7535127a78c" />
+
+
