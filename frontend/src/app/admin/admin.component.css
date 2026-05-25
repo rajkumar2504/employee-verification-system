@@ -1,0 +1,284 @@
+.admin-wrapper {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Header Banner */
+.admin-header-banner {
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--welcome-gradient-end) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-text h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 750;
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Content Grid Layout */
+.admin-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* On large screens, split layout side-by-side when form is open */
+@media (min-width: 992px) {
+  .admin-content-grid.show-form-layout {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+/* Table Card */
+.admin-table-card {
+  border-radius: 12px !important;
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm) !important;
+  height: max-content;
+}
+
+.table-toolbar {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-toolbar h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.search-form-field {
+  width: 100%;
+  max-width: 280px;
+}
+
+::ng-deep .search-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+.table-content-area {
+  padding: 0 !important;
+}
+
+.table-scroll-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.admin-table {
+  width: 100%;
+  background-color: transparent !important;
+  border-collapse: collapse;
+}
+
+::ng-deep .mat-mdc-header-row {
+  background-color: var(--table-header-bg) !important;
+  height: 52px;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+::ng-deep .mat-mdc-row {
+  height: 56px;
+}
+
+::ng-deep .mat-mdc-cell {
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.cell-primary {
+  color: var(--text-primary) !important;
+  font-weight: 550;
+}
+
+.table-row-hover:hover {
+  background-color: var(--table-row-hover-bg) !important;
+}
+
+.admin-table code {
+  background-color: var(--input-bg, rgba(0, 0, 0, 0.05));
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* Status Chips (matching dashboard) */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.badge-verified {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.badge-progress {
+  background-color: rgba(33, 150, 243, 0.1);
+  color: #1565c0;
+  border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+.badge-pending {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ef6c00;
+  border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.badge-failed {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #c62828;
+  border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.dark-theme .badge-verified { background-color: rgba(129, 199, 132, 0.15); color: #a5d6a7; }
+.dark-theme .badge-progress { background-color: rgba(100, 181, 246, 0.15); color: #90caf9; }
+.dark-theme .badge-pending { background-color: rgba(255, 183, 77, 0.15); color: #ffe082; }
+.dark-theme .badge-failed { background-color: rgba(229, 115, 115, 0.15); color: #ef9a9a; }
+
+/* Editor Form Card */
+.admin-form-card {
+  border-radius: 12px !important;
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md) !important;
+  padding: 1.5rem !important;
+  animation: slideIn 0.3s ease-out;
+  height: max-content;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-header {
+  padding: 0 0 1.5rem 0 !important;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.form-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary);
+}
+
+.form-content {
+  padding: 0 !important;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1.25rem;
+  row-gap: 0.5rem;
+}
+
+.col-half {
+  grid-column: span 1;
+}
+
+.col-full {
+  grid-column: span 2;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.btn-spinner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+::ng-deep .btn-spinner .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #ffffff;
+}
+
+/* Material form overrides for style guide */
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important;
+  color: var(--text-secondary) !important;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .col-half, .col-full {
+    grid-column: span 1;
+  }
+  .table-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-form-field {
+    max-width: 100%;
+  }
+}

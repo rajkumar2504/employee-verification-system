@@ -1,0 +1,193 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--page-bg);
+}
+
+/* Dynamic design background accent */
+.login-decor-bg {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(63, 81, 181, 0.08) 0%, rgba(33, 150, 243, 0.02) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px !important;
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color);
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+  z-index: 1;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 !important;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-color), #1976d2);
+  color: #ffffff;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3);
+}
+
+.login-logo mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.login-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem !important;
+}
+
+.login-subtitle {
+  font-size: 0.85rem !important;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.login-content {
+  padding: 0 !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Custom Mat Form Field Styling adjustments */
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: var(--input-bg, rgba(0, 0, 0, 0.02)) !important;
+  border-radius: 8px !important;
+}
+
+::ng-deep .dark-theme .mat-mdc-text-field-wrapper {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Error Banner */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: rgba(244, 67, 54, 0.08);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #d32f2f;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.dark-theme .error-banner {
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #ff8a80;
+}
+
+.error-banner mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Action Button */
+.action-container {
+  margin-top: 1.5rem;
+}
+
+.login-btn {
+  height: 48px !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--primary-color), #1976d2) !important;
+  box-shadow: 0 4px 14px rgba(63, 81, 181, 0.25) !important;
+  transition: all 0.2s ease !important;
+}
+
+.login-btn:hover:not([disabled]) {
+  opacity: 0.95;
+  box-shadow: 0 6px 20px rgba(63, 81, 181, 0.35) !important;
+}
+
+.btn-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+::ng-deep .btn-spinner .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #ffffff;
+}
+
+/* Footer Demo Accounts Info */
+.login-footer {
+  margin-top: 2rem;
+  padding: 0 !important;
+  border-top: 1px dashed var(--border-color);
+}
+
+.system-hints {
+  padding: 1rem 0 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.system-hints p {
+  margin: 2px 0;
+}
+
+.system-hints code {
+  background-color: var(--input-bg, rgba(0, 0, 0, 0.05));
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}

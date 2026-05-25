@@ -1,0 +1,175 @@
+/* Import Angular Material Prebuilt Theme */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Design System Token Definitions */
+:root {
+  /* Common Palette */
+  --primary-color: #3f51b5;
+  --primary-light: rgba(63, 81, 181, 0.08);
+  --primary-dark: #303f9f;
+  --accent-color: #ff4081;
+  --error-color: #f44336;
+  
+  /* Light Theme Variables */
+  --page-bg: #f5f7fb;
+  --surface-bg: #ffffff;
+  --card-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --sidebar-hover-bg: rgba(63, 81, 181, 0.04);
+  --sidebar-active-bg: linear-gradient(135deg, #3f51b5 0%, #1976d2 100%);
+  --sidebar-active-color: #ffffff;
+  --border-color: #e2e8f0;
+  
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --table-header-bg: #f8fafc;
+  --table-row-hover-bg: #f1f5f9;
+  --welcome-gradient-end: #e8eaf6;
+  
+  --skeleton-bg: #e2e8f0;
+  --skeleton-pulse: #f1f5f9;
+  --skeleton-header-bg: #cbd5e1;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme {
+  /* Dark Theme Variables */
+  --page-bg: #0f172a;
+  --surface-bg: #1e293b;
+  --card-bg: #1e293b;
+  --navbar-bg: #1e293b;
+  --sidebar-bg: #1e293b;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.04);
+  --sidebar-active-bg: linear-gradient(135deg, #5c6bc0 0%, #29b6f6 100%);
+  --sidebar-active-color: #0f172a;
+  --border-color: #334155;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  
+  --table-header-bg: #151f32;
+  --table-row-hover-bg: #1e293b;
+  --welcome-gradient-end: #1e2540;
+  
+  --skeleton-bg: #334155;
+  --skeleton-pulse: #475569;
+  --skeleton-header-bg: #1e293b;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  
+  --primary-color: #7986cb;
+  --primary-light: rgba(121, 134, 203, 0.15);
+}
+
+/* Global Resetting */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  margin-top: 0;
+}
+
+/* Customized Angular Material Overrides */
+::ng-deep .mat-mdc-card {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Form Fields */
+::ng-deep .mat-mdc-form-field-label {
+  color: var(--text-secondary) !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: var(--surface-bg) !important;
+}
+
+::ng-deep .mat-mdc-form-field-focus-active .mdc-floating-label {
+  color: var(--primary-color) !important;
+}
+
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: var(--border-color) !important;
+}
+
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
+  border-color: var(--text-muted) !important;
+}
+
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: var(--primary-color) !important;
+  border-width: 2px !important;
+}
+
+::ng-deep .mat-mdc-select-value {
+  color: var(--text-primary) !important;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: var(--text-secondary) !important;
+}
+
+::ng-deep .mat-mdc-option {
+  color: var(--text-primary) !important;
+  background-color: var(--card-bg) !important;
+}
+
+::ng-deep .mat-mdc-option:hover, ::ng-deep .mat-mdc-option.mdc-list-item--selected {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+/* Custom Snackbars */
+.success-snackbar {
+  --mdc-snackbar-container-color: #2e7d32;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #c62828;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--page-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

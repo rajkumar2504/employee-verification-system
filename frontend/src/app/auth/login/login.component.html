@@ -1,0 +1,81 @@
+<div class="login-wrapper">
+  
+  <div class="login-decor-bg"></div>
+
+  <mat-card class="login-card mat-elevation-z12">
+    
+    <mat-card-header class="login-header">
+      <div class="login-logo">
+        <mat-icon>verified_user</mat-icon>
+      </div>
+      <mat-card-title class="login-title">VeriShield Portal</mat-card-title>
+      <mat-card-subtitle class="login-subtitle">Background Verification & Access Management</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="login-content">
+      <!-- Error Message Area -->
+      <div class="error-banner" *ngIf="errorMessage">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <!-- Reactive Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
+        <!-- User ID -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>User ID</mat-label>
+          <input matInput formControlName="userId" placeholder="Enter your User ID" autocomplete="username">
+          <mat-icon matSuffix color="primary">person</mat-icon>
+          <mat-error *ngIf="f['userId'].hasError('required')">User ID is required</mat-error>
+          <mat-error *ngIf="f['userId'].hasError('minlength')">User ID must be at least 3 characters</mat-error>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password" autocomplete="current-password">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="f['password'].hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="f['password'].hasError('minlength')">Password must be at least 6 characters</mat-error>
+        </mat-form-field>
+
+        <!-- Role Selector -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Access Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+              {{role.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix color="primary" style="margin-right: 8px;">security</mat-icon>
+          <mat-error *ngIf="f['role'].hasError('required')">Please select an access role</mat-error>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <div class="action-container">
+          <button mat-raised-button color="primary" class="login-btn full-width" type="submit" [disabled]="loginForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Secure Sign In</span>
+            <div class="btn-spinner" *ngIf="isLoading">
+              <mat-spinner diameter="20" color="accent"></mat-spinner>
+              <span>Authenticating...</span>
+            </div>
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="login-footer">
+      <div class="system-hints">
+        <p><strong>Demo Accounts:</strong></p>
+        <p>Admin: <code>admin</code> / <code>admin123</code></p>
+        <p>General User: <code>user</code> / <code>user123</code></p>
+      </div>
+    </mat-card-footer>
+
+  </mat-card>
+
+</div>

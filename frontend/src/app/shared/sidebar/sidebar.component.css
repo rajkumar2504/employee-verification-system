@@ -1,0 +1,91 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1rem 0.5rem 1.25rem;
+  border-bottom: 1px solid transparent;
+}
+
+.system-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted, #757575);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.sidebar-nav-list {
+  padding: 1rem 0.5rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+
+.nav-item {
+  border-radius: 8px !important;
+  margin: 2px 4px !important;
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.2s ease-in-out !important;
+  height: 48px !important;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item:hover {
+  background-color: var(--sidebar-hover-bg, rgba(0, 0, 0, 0.04)) !important;
+  color: var(--text-primary) !important;
+}
+
+.nav-item mat-icon {
+  margin-right: 12px;
+  color: var(--text-muted) !important;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-item:hover mat-icon {
+  color: var(--primary-color) !important;
+}
+
+/* Active navigation item styling with premium feel */
+.active-item {
+  background: var(--sidebar-active-bg) !important;
+  color: var(--sidebar-active-color) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.active-item mat-icon {
+  color: var(--sidebar-active-color) !important;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--sidebar-footer-bg, rgba(0, 0, 0, 0.01));
+}
+
+.security-seal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.security-seal mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}

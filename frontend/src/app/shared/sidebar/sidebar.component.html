@@ -1,0 +1,30 @@
+<div class="sidebar-container" *ngIf="isLoggedIn">
+  
+  <!-- Sidebar Header (Optional Logo/Title in sidebar) -->
+  <div class="sidebar-header">
+    <span class="system-tag">BGC VERIFICATION HUB</span>
+  </div>
+
+  <mat-nav-list class="sidebar-nav-list">
+    <!-- Dashboard Link -->
+    <a mat-list-item routerLink="/dashboard" routerLinkActive="active-item" class="nav-item">
+      <mat-icon matListItemIcon>dashboard</mat-icon>
+      <span matListItemTitle>Dashboard</span>
+    </a>
+
+    <!-- Admin Panel / User Management Link -->
+    <a mat-list-item routerLink="/admin" routerLinkActive="active-item" *ngIf="isAdmin" class="nav-item">
+      <mat-icon matListItemIcon>people</mat-icon>
+      <span matListItemTitle>User Management</span>
+    </a>
+  </mat-nav-list>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer">
+    <div class="security-seal">
+      <mat-icon>lock</mat-icon>
+      <span>SSL Secured Portal</span>
+    </div>
+  </div>
+
+</div>

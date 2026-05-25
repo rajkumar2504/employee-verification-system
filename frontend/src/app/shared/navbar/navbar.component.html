@@ -1,0 +1,53 @@
+<mat-toolbar class="navbar mat-elevation-z3">
+  <!-- Left Side: Sidebar Toggle & Brand -->
+  <div class="nav-left">
+    <button mat-icon-button class="sidebar-toggle" (click)="onToggleSidebar()" *ngIf="currentUser" aria-label="Toggle Sidebar">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <div class="brand-container">
+      <div class="brand-logo">
+        <mat-icon color="primary">verified_user</mat-icon>
+      </div>
+      <span class="brand-text">VeriShield<span class="brand-highlight">Compliance</span></span>
+    </div>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Right Side: Theme, User Info & Action -->
+  <div class="nav-right" *ngIf="currentUser">
+    <!-- Dark Mode Toggle -->
+    <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'" aria-label="Toggle Dark/Light Mode">
+      <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+    <!-- User Information Profile -->
+    <div class="user-profile-badge">
+      <div class="avatar-placeholder">
+        {{ currentUser.name ? currentUser.name.charAt(0) : 'U' }}
+      </div>
+      <div class="profile-details">
+        <span class="profile-name">{{ currentUser.name }}</span>
+        <span class="profile-role" [ngClass]="{'role-admin': currentUser.role === 'Admin', 'role-user': currentUser.role !== 'Admin'}">
+          {{ currentUser.role }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="nav-divider"></div>
+
+    <!-- Logout Action -->
+    <button mat-icon-button color="warn" (click)="logout()" matTooltip="Logout from system" aria-label="Log Out">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+
+  <!-- Unauthenticated Dark Mode Toggler -->
+  <div class="nav-right" *ngIf="!currentUser">
+    <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'" aria-label="Toggle Dark/Light Mode">
+      <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

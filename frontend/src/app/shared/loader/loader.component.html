@@ -1,0 +1,24 @@
+<div class="loader-container">
+  
+  <!-- Spinner & Text Message -->
+  <div *ngIf="type === 'spinner' || type === 'both'" class="spinner-section">
+    <mat-spinner diameter="48" color="primary"></mat-spinner>
+    <p class="loading-message">{{ message }}</p>
+  </div>
+
+  <!-- Skeleton Table Loader -->
+  <div *ngIf="type === 'skeleton' || type === 'both'" class="skeleton-section">
+    <div class="skeleton-table">
+      <!-- Header Skeleton -->
+      <div class="skeleton-row header-skeleton">
+        <div *ngFor="let col of colArray" class="skeleton-cell header-cell"></div>
+      </div>
+      
+      <!-- Body Row Skeletons -->
+      <div *ngFor="let row of rowArray" class="skeleton-row body-skeleton">
+        <div *ngFor="let col of colArray" class="skeleton-cell body-cell"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

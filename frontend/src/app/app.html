@@ -1,0 +1,31 @@
+<!-- Unauthenticated Fullscreen Layout -->
+<div class="app-container unauthenticated-layout" *ngIf="!isLoggedIn">
+  <app-navbar></app-navbar>
+  <div class="auth-outlet-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- Authenticated Dashboard Layout -->
+<div class="app-container authenticated-layout" *ngIf="isLoggedIn">
+  <!-- Navbar with Hamburger toggle -->
+  <app-navbar (toggleSidebar)="toggleSidenav()"></app-navbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav Sidebar Drawer -->
+    <mat-sidenav #sidenav 
+                 [mode]="sidenavMode" 
+                 [opened]="sidenavOpened" 
+                 (closedStart)="sidenavOpened = false" 
+                 class="app-sidenav">
+      <app-sidebar (click)="onNavItemClicked()"></app-sidebar>
+    </mat-sidenav>
+
+    <!-- Sidenav Content Area -->
+    <mat-sidenav-content class="app-content-content">
+      <main class="content-viewport">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
