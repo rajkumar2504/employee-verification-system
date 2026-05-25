@@ -4,6 +4,24 @@ A modern, responsive, full-stack Single Page Application (SPA) designed to simul
 
 ---
 
+## 📷 Project Preview & Screenshots
+
+Here is a look at the premium UI/UX enhancements and the dark theme dashboard of the VeriShield Compliance Portal:
+
+| **Split-Screen Login Page** | **Compliance Dashboard (Dark Theme)** |
+| :---: | :---: |
+| ![Login Page](https://github.com/user-attachments/assets/6180c723-c9e5-484f-8b62-eb81239a448b) | ![Compliance Dashboard](https://github.com/user-attachments/assets/7ad9825c-c5ce-43e2-be21-93552a8b2cfe) |
+
+| **User & Compliance Management** | **Verification Workflow Stepper** |
+| :---: | :---: |
+| ![User Management](https://github.com/user-attachments/assets/9684cae7-d500-4718-a39c-a1328085ebbc) | ![Workflow Timeline](https://github.com/user-attachments/assets/29da1fd5-7288-4a09-b684-37bea7c56e8c) |
+
+| **Dark Mode Dropdown & Theme Settings** |
+| :---: |
+| ![Navbar Settings](https://github.com/user-attachments/assets/dd257d04-3ba8-4747-aa84-48b284531a79) |
+
+---
+
 ## 🚀 Key Features
 
 *   **Secure JWT Authentication**: Role-based access control (RBAC) with secure session storage.
